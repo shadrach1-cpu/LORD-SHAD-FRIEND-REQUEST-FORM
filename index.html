@@ -382,7 +382,7 @@
 
     <div class="field">
       <label for="name"><span class="num">I.</span> Your name</label>
-      <input type="text" id="name" placeholder="What do I call you?" required maxlength="60">
+      <input type="text" id="name" placeholder="What do I call you?" required maxlength="60" autocomplete="name">
     </div>
 
     <div class="field">
@@ -392,7 +392,7 @@
 
     <div class="field">
       <label for="age"><span class="num">III.</span> Age</label>
-      <input type="number" id="age" placeholder="e.g. 16" min="10" max="19" required>
+      <input type="number" id="age" placeholder="e.g. 16" min="10" max="19" required inputmode="numeric">
     </div>
 
     <div class="field">
@@ -473,7 +473,40 @@
 </div>
 
 <script>
-  const VAULT_PASSCODE = "SHADIGANG"; // change this to whatever you like
+  const VAULT_PASSCODE = "Shad!RoyalVault#2026$N7"; // Change this before publishing if desired
+
+  // ---------- storage compatibility ----------
+  // Some hosting environments provide window.storage; normal websites do not.
+  // This wrapper uses window.storage when available and falls back to localStorage.\n  // localStorage is browser-local; it does NOT sync submissions between different devices.
+  const storage = {
+    async set(key, value) {
+      if (window.storage && typeof window.storage.set === "function") {
+        return window.storage.set(key, value, true);
+      }
+      localStorage.setItem(key, value);
+      return true;
+    },
+
+    async get(key) {
+      if (window.storage && typeof window.storage.get === "function") {
+        return window.storage.get(key, true);
+      }
+      const value = localStorage.getItem(key);
+      return value === null ? null : { value };
+    },
+
+    async list(prefix) {
+      if (window.storage && typeof window.storage.list === "function") {
+        return window.storage.list(prefix, true);
+      }
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(prefix)) keys.push(key);
+      }
+      return { keys };
+    }
+  };
 
   // ---------- progress tracking ----------
   const requiredIds = ['name','age','location'];
@@ -536,7 +569,7 @@
 
     try{
       const key = 'entry:' + Date.now() + ':' + Math.random().toString(36).slice(2,8);
-      await window.storage.set(key, JSON.stringify(entry), true);
+      await storage.set(key, JSON.stringify(entry));
       document.querySelector('.progress-row').style.display = 'none';
       form.style.display = 'none';
       document.getElementById('confirmScreen').style.display = 'block';
@@ -559,6 +592,10 @@
     vault.style.display = vault.style.display === 'block' ? 'none' : 'block';
   });
 
+  document.getElementById('vaultPass').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') vaultUnlock.click();
+  });
+
   vaultUnlock.addEventListener('click', async () => {
     const pass = document.getElementById('vaultPass').value;
     if(pass !== VAULT_PASSCODE){
@@ -567,17 +604,21 @@
     }
     vaultEntries.innerHTML = '<div class="empty-state">Loading...</div>';
     try{
-      const list = await window.storage.list('entry:', true);
+      const list = await storage.list('entry:');
       if(!list || !list.keys || list.keys.length === 0){
         vaultEntries.innerHTML = '<div class="empty-state">No submissions yet. Send the link out!</div>';
         return;
       }
       const results = await Promise.all(
-        list.keys.map(k => window.storage.get(k, true).catch(() => null))
+        list.keys.map(k => storage.get(k).catch(() => null))
       );
       const entries = results
         .filter(Boolean)
-        .map(r => JSON.parse(r.value))
+        .map(r => {
+          try { return JSON.parse(r.value); }
+          catch { return null; }
+        })
+        .filter(Boolean)
         .sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 
       vaultEntries.innerHTML = entries.map(e => `
