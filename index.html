@@ -2,8 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lord Shad De Great — Sign the Decree</title>
+<meta name="description" content="You've been summoned by Lord Shad De Great. Fill out this quick intro form — name, vibe, hobbies, fun facts — so he actually knows who he's talking to.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#150726">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lord Shad De Great — Sign the Decree">
+<meta property="og:description" content="You've been summoned by Lord Shad De Great. Fill this out so he actually knows who he's talking to.">
+<meta property="og:site_name" content="Lord Shad De Great">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lord Shad De Great — Sign the Decree">
+<meta name="twitter:description" content="You've been summoned by Lord Shad De Great. Fill this out so he actually knows who he's talking to.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,43 +37,52 @@
     --line: #47275F;
     --ok: #6FDB9C;
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html{ font-size: 100%; -webkit-text-size-adjust: 100%; }
   body{margin:0;}
   html,body{
     background:
       repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 8px),
       radial-gradient(ellipse 900px 500px at 50% -10%, #47205F 0%, transparent 60%),
       linear-gradient(180deg, var(--velvet-1) 0%, var(--velvet-2) 100%);
+    background-attachment: scroll;
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
-    min-height:100vh;
+    min-height: 100dvh;
     -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
   }
 
   .wrap{
     max-width: 540px;
     margin: 0 auto;
-    padding: 0 18px 70px;
+    padding: 0 18px calc(50px + env(safe-area-inset-bottom));
     position: relative;
     overflow: hidden;
+    width: 100%;
+  }
+
+  @media (max-width: 380px){
+    .wrap{ padding-left: 14px; padding-right: 14px; }
   }
 
   /* ---------- hero ---------- */
   .hero{
     position:relative;
     text-align:center;
-    padding: 46px 0 30px;
+    padding: clamp(28px, 8vw, 46px) 0 26px;
   }
   .crown-mark{
     position:absolute;
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 340px;
-    height: 340px;
+    width: min(340px, 88vw);
+    height: min(340px, 88vw);
     opacity: 0.07;
     z-index:0;
     animation: driftRotate 60s linear infinite;
+    pointer-events: none;
   }
   @keyframes driftRotate{
     from{ transform: translateX(-50%) rotate(0deg); }
@@ -78,15 +102,17 @@
     display:inline-flex;
     align-items:center;
     gap:7px;
+    max-width: 92%;
     background: linear-gradient(180deg, var(--panel-2), var(--panel));
     border: 1px solid var(--line);
     padding: 7px 16px 7px 12px;
     border-radius: 999px;
-    font-size: 12.5px;
+    font-size: clamp(11px, 3vw, 12.5px);
     color: var(--gold-bright);
     letter-spacing:0.02em;
     margin-bottom: 22px;
     box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
+    text-align: left;
   }
   .seal-badge .pip{width:6px;height:6px;border-radius:50%;background:var(--ok); box-shadow:0 0 6px var(--ok);}
 
@@ -94,10 +120,11 @@
     font-family:'Fraunces', serif;
     font-weight:700;
     font-optical-sizing: auto;
-    font-size: 46px;
-    line-height: 1.02;
+    font-size: clamp(30px, 9.5vw, 46px);
+    line-height: 1.05;
     letter-spacing: -0.01em;
     margin: 0 0 16px;
+    word-break: break-word;
   }
   h1 .who{ color: var(--text-main); display:block; }
   h1 .title{
@@ -146,7 +173,7 @@
     background: linear-gradient(180deg, var(--panel-2) 0%, var(--panel) 100%);
     border: 1px solid var(--line);
     border-radius: 20px;
-    padding: 8px 22px 26px;
+    padding: 8px clamp(16px, 5vw, 22px) 26px;
     margin-top: 8px;
     box-shadow:
       0 1px 0 rgba(255,255,255,0.05) inset,
@@ -156,7 +183,7 @@
     content:"";
     display:block;
     height:3px;
-    margin: 0 -22px 22px;
+    margin: 0 clamp(-16px, -5vw, -22px) 22px;
     background: linear-gradient(90deg, var(--ruby), var(--gold) 50%, var(--ruby));
     border-radius: 0 0 3px 3px;
   }
@@ -189,29 +216,36 @@
     border: 1.5px solid var(--line);
     color: var(--text-main);
     border-radius: 11px;
-    padding: 12px 14px;
+    padding: 13px 14px;
     font-family:'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 16px;
+    min-height: 48px;
     outline:none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
   }
   input::placeholder, textarea::placeholder{color: #6B5286;}
   input:focus, textarea:focus{
     border-color: var(--gold);
     box-shadow: 0 0 0 3px rgba(232,185,63,0.15);
   }
-  textarea{resize:vertical; min-height:66px; line-height:1.5;}
+  textarea{resize:vertical; min-height:72px; line-height:1.5;}
 
   .chip-group{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{
     border: 1.5px solid var(--line);
     background: var(--velvet-2);
     color: var(--text-muted);
-    padding: 9px 14px;
+    padding: 11px 15px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     border-radius: 999px;
-    font-size: 13.5px;
+    font-size: 14px;
     cursor:pointer;
     user-select:none;
+    touch-action: manipulation;
     transition: all 0.12s ease;
   }
   .chip:hover{ border-color: var(--gold); color: var(--text-main); }
@@ -382,7 +416,7 @@
 
     <div class="field">
       <label for="name"><span class="num">I.</span> Your name</label>
-      <input type="text" id="name" placeholder="What do I call you?" required maxlength="60" autocomplete="name">
+      <input type="text" id="name" placeholder="What do I call you?" required maxlength="60">
     </div>
 
     <div class="field">
@@ -392,7 +426,7 @@
 
     <div class="field">
       <label for="age"><span class="num">III.</span> Age</label>
-      <input type="number" id="age" placeholder="e.g. 16" min="10" max="19" required inputmode="numeric">
+      <input type="number" id="age" placeholder="e.g. 16" min="10" max="19" required>
     </div>
 
     <div class="field">
@@ -443,7 +477,7 @@
     </div>
 
     <button type="submit" class="submit" id="submitBtn">Send it to Lord Shad</button>
-    <div class="error" id="formError">Fill in your name, age, and location at least — the rest is up to you.</div>
+    <div class="error" id="formError">Fill in your name, age, location, and what you do for fun at least — the rest is up to you.</div>
   </form>
 
   <div class="confirm" id="confirmScreen">
@@ -473,40 +507,7 @@
 </div>
 
 <script>
-  const VAULT_PASSCODE = "Shad!RoyalVault#2026$N7"; // Change this before publishing if desired
-
-  // ---------- storage compatibility ----------
-  // Some hosting environments provide window.storage; normal websites do not.
-  // This wrapper uses window.storage when available and falls back to localStorage.\n  // localStorage is browser-local; it does NOT sync submissions between different devices.
-  const storage = {
-    async set(key, value) {
-      if (window.storage && typeof window.storage.set === "function") {
-        return window.storage.set(key, value, true);
-      }
-      localStorage.setItem(key, value);
-      return true;
-    },
-
-    async get(key) {
-      if (window.storage && typeof window.storage.get === "function") {
-        return window.storage.get(key, true);
-      }
-      const value = localStorage.getItem(key);
-      return value === null ? null : { value };
-    },
-
-    async list(prefix) {
-      if (window.storage && typeof window.storage.list === "function") {
-        return window.storage.list(prefix, true);
-      }
-      const keys = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith(prefix)) keys.push(key);
-      }
-      return { keys };
-    }
-  };
+  const VAULT_PASSCODE = "SHADIGANG"; // change this to whatever you like
 
   // ---------- progress tracking ----------
   const requiredIds = ['name','age','location'];
@@ -544,8 +545,16 @@
     const name = document.getElementById('name').value.trim();
     const age = document.getElementById('age').value.trim();
     const location = document.getElementById('location').value.trim();
+    const hobbies = document.getElementById('hobbies').value.trim();
+    const ageNum = Number(age);
 
-    if(!name || !age || !location){
+    if(!name || !age || !location || !hobbies){
+      formError.textContent = "Fill in your name, age, location, and what you do for fun at least — the rest is up to you.";
+      formError.style.display = 'block';
+      return;
+    }
+    if(!Number.isInteger(ageNum) || ageNum < 10 || ageNum > 19){
+      formError.textContent = "Age should be a real number between 10 and 19.";
       formError.style.display = 'block';
       return;
     }
@@ -569,7 +578,7 @@
 
     try{
       const key = 'entry:' + Date.now() + ':' + Math.random().toString(36).slice(2,8);
-      await storage.set(key, JSON.stringify(entry));
+      await window.storage.set(key, JSON.stringify(entry), true);
       document.querySelector('.progress-row').style.display = 'none';
       form.style.display = 'none';
       document.getElementById('confirmScreen').style.display = 'block';
@@ -592,10 +601,6 @@
     vault.style.display = vault.style.display === 'block' ? 'none' : 'block';
   });
 
-  document.getElementById('vaultPass').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') vaultUnlock.click();
-  });
-
   vaultUnlock.addEventListener('click', async () => {
     const pass = document.getElementById('vaultPass').value;
     if(pass !== VAULT_PASSCODE){
@@ -604,21 +609,17 @@
     }
     vaultEntries.innerHTML = '<div class="empty-state">Loading...</div>';
     try{
-      const list = await storage.list('entry:');
+      const list = await window.storage.list('entry:', true);
       if(!list || !list.keys || list.keys.length === 0){
         vaultEntries.innerHTML = '<div class="empty-state">No submissions yet. Send the link out!</div>';
         return;
       }
       const results = await Promise.all(
-        list.keys.map(k => storage.get(k).catch(() => null))
+        list.keys.map(k => window.storage.get(k, true).catch(() => null))
       );
       const entries = results
         .filter(Boolean)
-        .map(r => {
-          try { return JSON.parse(r.value); }
-          catch { return null; }
-        })
-        .filter(Boolean)
+        .map(r => JSON.parse(r.value))
         .sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 
       vaultEntries.innerHTML = entries.map(e => `
