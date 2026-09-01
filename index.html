@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lord Shad De Great — Sign the Decree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --velvet-1: #2A0E3F;
+    --velvet-2: #150726;
+    --panel: #23103A;
+    --panel-2: #2E1650;
+    --gold: #E8B93F;
+    --gold-bright: #F6D673;
+    --ruby: #E6425A;
+    --ruby-dark: #A82C40;
+    --text-main: #F4EAFB;
+    --text-muted: #B49FCB;
+    --line: #47275F;
+    --ok: #6FDB9C;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  html,body{
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 8px),
+      radial-gradient(ellipse 900px 500px at 50% -10%, #47205F 0%, transparent 60%),
+      linear-gradient(180deg, var(--velvet-1) 0%, var(--velvet-2) 100%);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 0 18px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    text-align:center;
+    padding: 46px 0 30px;
+  }
+  .crown-mark{
+    position:absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 340px;
+    opacity: 0.07;
+    z-index:0;
+    animation: driftRotate 60s linear infinite;
+  }
+  @keyframes driftRotate{
+    from{ transform: translateX(-50%) rotate(0deg); }
+    to{ transform: translateX(-50%) rotate(360deg); }
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    opacity:0;
+    animation: riseIn 0.7s cubic-bezier(.2,.8,.25,1) 0.05s forwards;
+  }
+  @keyframes riseIn{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .seal-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line);
+    padding: 7px 16px 7px 12px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--gold-bright);
+    letter-spacing:0.02em;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
+  }
+  .seal-badge .pip{width:6px;height:6px;border-radius:50%;background:var(--ok); box-shadow:0 0 6px var(--ok);}
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-optical-sizing: auto;
+    font-size: 46px;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+  }
+  h1 .who{ color: var(--text-main); display:block; }
+  h1 .title{
+    display:block;
+    color: transparent;
+    background: linear-gradient(100deg, var(--gold) 10%, var(--gold-bright) 45%, var(--ruby) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-style: italic;
+  }
+  .hero p.sub{
+    color: var(--text-muted);
+    font-size: 15.5px;
+    line-height:1.55;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .hero p.sub b{ color: var(--text-main); font-weight:600; }
+
+  /* ---------- progress ---------- */
+  .progress-row{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:10px;
+    margin: 26px 0 6px;
+  }
+  .progress-track{
+    flex:1;
+    height: 6px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--ruby), var(--gold));
+    transition: width 0.35s ease;
+  }
+  .progress-label{ font-size:11.5px; color: var(--text-muted); white-space:nowrap; }
+
+  /* ---------- card ---------- */
+  .card{
+    position:relative;
+    z-index:1;
+    background: linear-gradient(180deg, var(--panel-2) 0%, var(--panel) 100%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 8px 22px 26px;
+    margin-top: 8px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.05) inset,
+      0 30px 60px -25px rgba(0,0,0,0.6);
+  }
+  .card::before{
+    content:"";
+    display:block;
+    height:3px;
+    margin: 0 -22px 22px;
+    background: linear-gradient(90deg, var(--ruby), var(--gold) 50%, var(--ruby));
+    border-radius: 0 0 3px 3px;
+  }
+
+  .field{margin-bottom:21px;}
+  .field:last-of-type{margin-bottom:0;}
+  label{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    font-size: 13.5px;
+    font-weight:600;
+    margin-bottom:9px;
+    color: var(--text-main);
+  }
+  label .num{
+    color: var(--gold-bright);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:14px;
+  }
+  label .opt{
+    font-weight:400;
+    color: var(--text-muted);
+    font-size:11.5px;
+  }
+  input[type=text], input[type=number], textarea{
+    width:100%;
+    background: var(--velvet-2);
+    border: 1.5px solid var(--line);
+    color: var(--text-main);
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-family:'Inter', sans-serif;
+    font-size: 15px;
+    outline:none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  input::placeholder, textarea::placeholder{color: #6B5286;}
+  input:focus, textarea:focus{
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(232,185,63,0.15);
+  }
+  textarea{resize:vertical; min-height:66px; line-height:1.5;}
+
+  .chip-group{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border: 1.5px solid var(--line);
+    background: var(--velvet-2);
+    color: var(--text-muted);
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    cursor:pointer;
+    user-select:none;
+    transition: all 0.12s ease;
+  }
+  .chip:hover{ border-color: var(--gold); color: var(--text-main); }
+  .chip.selected{
+    background: linear-gradient(90deg, var(--ruby), var(--ruby-dark));
+    border-color: transparent;
+    color: #fff;
+    font-weight:600;
+  }
+
+  .note{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-size:12.5px;
+    color: var(--text-muted);
+    line-height:1.55;
+    background: var(--velvet-2);
+    border: 1px dashed var(--line);
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-top: 24px;
+  }
+  .note .ic{flex-shrink:0; font-size:15px; margin-top:1px;}
+
+  button.submit{
+    width:100%;
+    margin-top: 22px;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: #2A1300;
+    border:none;
+    padding: 16px;
+    border-radius: 13px;
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-style: italic;
+    font-size: 18px;
+    cursor:pointer;
+    box-shadow: 0 4px 0 0 #A5791D;
+    transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.2s ease;
+  }
+  button.submit:active{
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 0 #A5791D;
+  }
+  button.submit:disabled{opacity:0.55; cursor:default;}
+  .error{color:#FF9C8A; font-size:13px; margin-top:12px; display:none; text-align:center;}
+
+  /* ---------- confirmation ---------- */
+  .confirm{
+    display:none;
+    text-align:center;
+    padding: 30px 12px 10px;
+    position:relative;
+    z-index:1;
+  }
+  .wax-seal{
+    width: 96px; height: 96px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--ruby), var(--ruby-dark) 75%);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 38px;
+    box-shadow: 0 10px 24px -8px rgba(230,66,90,0.6), 0 0 0 4px rgba(232,185,63,0.25);
+    transform: scale(0);
+    animation: sealPop 0.5s cubic-bezier(.34,1.56,.64,1) 0.1s forwards;
+  }
+  @keyframes sealPop{ to{ transform: scale(1); } }
+  .confirm h2{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:28px;
+    margin: 0 0 10px;
+    color: var(--gold-bright);
+  }
+  .confirm p{color:var(--text-muted); font-size:15px; line-height:1.6; max-width:360px; margin: 0 auto 8px;}
+  .confirm p.final{ color:var(--text-main); font-weight:600; margin-top:16px; }
+
+  /* ---------- footer / vault ---------- */
+  footer{
+    text-align:center;
+    margin-top: 44px;
+    position:relative;
+    z-index:1;
+  }
+  .vault-toggle{
+    background:none;
+    border:none;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    cursor:pointer;
+    letter-spacing:0.02em;
+  }
+  .vault-toggle:hover{ color: var(--gold-bright); }
+
+  .vault{
+    display:none;
+    text-align:left;
+    margin-top: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+  }
+  .vault-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .vault-head .chest{ font-size:22px; }
+  .vault h3{font-family:'Fraunces', serif; font-style:italic; margin:0; font-size:19px; color: var(--gold-bright);}
+  .vault-sub{ font-size:12px; color:var(--text-muted); margin:2px 0 0;}
+
+  .vault-unlock-row{ display:flex; gap:8px; }
+  .vault-unlock-row input{ flex:1; margin-bottom:0; }
+  .vault-btn{
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color:#2A1300;
+    border:none;
+    padding:0 18px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .vault-entries{margin-top:16px; display:flex; flex-direction:column; gap:11px; max-height: 440px; overflow-y:auto;}
+  .entry{
+    background: var(--velvet-2);
+    border:1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius:10px;
+    padding:13px 15px;
+    font-size:13.5px;
+    line-height:1.65;
+  }
+  .entry .ename{ color:var(--gold-bright); font-weight:700; }
+  .entry .meta{ color: var(--text-muted); font-size:11px; margin-top:6px; letter-spacing:0.01em; }
+  .empty-state{color:var(--text-muted); font-size:13.5px; text-align:center; padding:22px 0;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <svg class="crown-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 140 L20 70 L60 100 L100 40 L140 100 L180 70 L170 140 Z" fill="none" stroke="#F6D673" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="20" cy="65" r="7" fill="#F6D673"/>
+    <circle cx="100" cy="35" r="8" fill="#F6D673"/>
+    <circle cx="180" cy="65" r="7" fill="#F6D673"/>
+    <rect x="30" y="140" width="140" height="14" rx="3" fill="none" stroke="#F6D673" stroke-width="3"/>
+  </svg>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal-badge"><span class="pip"></span> royal decree · reply required</div>
+      <h1>
+        <span class="who">You've been summoned by</span>
+        <span class="title">Lord Shad De Great</span>
+      </h1>
+      <p class="sub">We don't know each other yet — but you got this link for a reason. <b>Fill this out</b> so I know exactly who I'm dealing with.</p>
+    </div>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 4 required</div>
+  </div>
+
+  <form class="card" id="introForm">
+
+    <div class="field">
+      <label for="name"><span class="num">I.</span> Your name</label>
+      <input type="text" id="name" placeholder="What do I call you?" required maxlength="60">
+    </div>
+
+    <div class="field">
+      <label for="nickname"><span class="num">II.</span> Nickname <span class="opt">(what your friends call you — optional)</span></label>
+      <input type="text" id="nickname" placeholder="e.g. Big T, Sunny..." maxlength="40">
+    </div>
+
+    <div class="field">
+      <label for="age"><span class="num">III.</span> Age</label>
+      <input type="number" id="age" placeholder="e.g. 16" min="10" max="19" required>
+    </div>
+
+    <div class="field">
+      <label for="location"><span class="num">IV.</span> Where you're from <span class="opt">(city / country is enough)</span></label>
+      <input type="text" id="location" placeholder="e.g. Benin City, Nigeria" required maxlength="60">
+    </div>
+
+    <div class="field">
+      <label><span class="num">V.</span> Pick your vibe</label>
+      <div class="chip-group" id="vibeGroup">
+        <div class="chip" data-value="Class clown">😂 Class clown</div>
+        <div class="chip" data-value="Quiet genius">🧠 Quiet genius</div>
+        <div class="chip" data-value="Main character">🎬 Main character</div>
+        <div class="chip" data-value="Chronically online">📱 Chronically online</div>
+        <div class="chip" data-value="Sporty">⚽ Sporty</div>
+        <div class="chip" data-value="Overthinker">💭 Overthinker</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="hobbies"><span class="num">VI.</span> What do you actually do for fun?</label>
+      <textarea id="hobbies" placeholder="Music, gaming, football, drawing, gist with friends..." required maxlength="200"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="song"><span class="num">VII.</span> Song stuck in your head lately</label>
+      <input type="text" id="song" placeholder="Track + artist" maxlength="80">
+    </div>
+
+    <div class="field">
+      <label for="funfact"><span class="num">VIII.</span> Give me a random fact about you</label>
+      <textarea id="funfact" placeholder="Something wild, weird, or just true" maxlength="200"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="question"><span class="num">IX.</span> If you could ask me one thing, what would it be?</label>
+      <input type="text" id="question" placeholder="Your question for Lord Shad" maxlength="120">
+    </div>
+
+    <div class="field">
+      <label for="social"><span class="num">X.</span> Social handle <span class="opt">(optional — only if you're comfortable)</span></label>
+      <input type="text" id="social" placeholder="@yourhandle" maxlength="40">
+    </div>
+
+    <div class="note">
+      <span class="ic">🛡️</span>
+      <span>Keep this fun and light. Don't put your home address, school name, or anything you wouldn't want a stranger to have — just enough for me to know your vibe.</span>
+    </div>
+
+    <button type="submit" class="submit" id="submitBtn">Send it to Lord Shad</button>
+    <div class="error" id="formError">Fill in your name, age, and location at least — the rest is up to you.</div>
+  </form>
+
+  <div class="confirm" id="confirmScreen">
+    <div class="wax-seal">👑</div>
+    <h2>Decree received.</h2>
+    <p>Lord Shad has officially received your intro. Thanks for putting yourself out there.</p>
+    <p class="final">Now go touch some grass. Or don't. I don't run your life.</p>
+  </div>
+
+  <footer>
+    <button class="vault-toggle" id="vaultToggle">🔒 Lord Shad's eyes only →</button>
+    <div class="vault" id="vault">
+      <div class="vault-head">
+        <span class="chest">🗝️</span>
+        <div>
+          <h3>The Royal Vault</h3>
+          <p class="vault-sub">Every intro that's ever been sent in, right here.</p>
+        </div>
+      </div>
+      <div class="vault-unlock-row">
+        <input type="text" id="vaultPass" placeholder="Enter the passcode">
+        <button class="vault-btn" id="vaultUnlock">Unlock</button>
+      </div>
+      <div class="vault-entries" id="vaultEntries"></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const VAULT_PASSCODE = "SHADIGANG"; // change this to whatever you like
+
+  // ---------- progress tracking ----------
+  const requiredIds = ['name','age','location'];
+  const hobbiesEl = document.getElementById('hobbies');
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+
+  function updateProgress(){
+    let filled = 0;
+    const total = 4; // name, age, location, hobbies
+    requiredIds.forEach(id => { if(document.getElementById(id).value.trim()) filled++; });
+    if(hobbiesEl.value.trim()) filled++;
+    progressFill.style.width = (filled/total*100) + '%';
+    progressLabel.textContent = filled + ' / ' + total + ' required';
+  }
+  ['name','age','location'].forEach(id => document.getElementById(id).addEventListener('input', updateProgress));
+  hobbiesEl.addEventListener('input', updateProgress);
+
+  // ---------- vibe chip selection ----------
+  let selectedVibe = null;
+  document.querySelectorAll('#vibeGroup .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#vibeGroup .chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      selectedVibe = chip.dataset.value;
+    });
+  });
+
+  const form = document.getElementById('introForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formError = document.getElementById('formError');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const location = document.getElementById('location').value.trim();
+
+    if(!name || !age || !location){
+      formError.style.display = 'block';
+      return;
+    }
+    formError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    const entry = {
+      name,
+      nickname: document.getElementById('nickname').value.trim(),
+      age,
+      location,
+      vibe: selectedVibe || "Didn't pick one",
+      hobbies: document.getElementById('hobbies').value.trim(),
+      song: document.getElementById('song').value.trim(),
+      funfact: document.getElementById('funfact').value.trim(),
+      question: document.getElementById('question').value.trim(),
+      social: document.getElementById('social').value.trim(),
+      submittedAt: new Date().toISOString()
+    };
+
+    try{
+      const key = 'entry:' + Date.now() + ':' + Math.random().toString(36).slice(2,8);
+      await window.storage.set(key, JSON.stringify(entry), true);
+      document.querySelector('.progress-row').style.display = 'none';
+      form.style.display = 'none';
+      document.getElementById('confirmScreen').style.display = 'block';
+    }catch(err){
+      console.error('Storage error:', err);
+      formError.textContent = "Something glitched — try again in a sec.";
+      formError.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send it to Lord Shad";
+    }
+  });
+
+  // ---------- vault ----------
+  const vaultToggle = document.getElementById('vaultToggle');
+  const vault = document.getElementById('vault');
+  const vaultUnlock = document.getElementById('vaultUnlock');
+  const vaultEntries = document.getElementById('vaultEntries');
+
+  vaultToggle.addEventListener('click', () => {
+    vault.style.display = vault.style.display === 'block' ? 'none' : 'block';
+  });
+
+  vaultUnlock.addEventListener('click', async () => {
+    const pass = document.getElementById('vaultPass').value;
+    if(pass !== VAULT_PASSCODE){
+      vaultEntries.innerHTML = '<div class="empty-state">Wrong passcode. Try again.</div>';
+      return;
+    }
+    vaultEntries.innerHTML = '<div class="empty-state">Loading...</div>';
+    try{
+      const list = await window.storage.list('entry:', true);
+      if(!list || !list.keys || list.keys.length === 0){
+        vaultEntries.innerHTML = '<div class="empty-state">No submissions yet. Send the link out!</div>';
+        return;
+      }
+      const results = await Promise.all(
+        list.keys.map(k => window.storage.get(k, true).catch(() => null))
+      );
+      const entries = results
+        .filter(Boolean)
+        .map(r => JSON.parse(r.value))
+        .sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+      vaultEntries.innerHTML = entries.map(e => `
+        <div class="entry">
+          <span class="ename">${escapeHtml(e.name)}</span>${e.nickname ? ' ("' + escapeHtml(e.nickname) + '")' : ''} — ${escapeHtml(e.age)}, ${escapeHtml(e.location)}<br>
+          Vibe: ${escapeHtml(e.vibe)}<br>
+          ${e.hobbies ? 'Into: ' + escapeHtml(e.hobbies) + '<br>' : ''}
+          ${e.song ? 'Song: ' + escapeHtml(e.song) + '<br>' : ''}
+          ${e.funfact ? 'Fact: ' + escapeHtml(e.funfact) + '<br>' : ''}
+          ${e.question ? 'Asked: "' + escapeHtml(e.question) + '"<br>' : ''}
+          ${e.social ? 'Handle: ' + escapeHtml(e.social) + '<br>' : ''}
+          <div class="meta">${new Date(e.submittedAt).toLocaleString()}</div>
+        </div>
+      `).join('');
+    }catch(err){
+      console.error(err);
+      vaultEntries.innerHTML = '<div class="empty-state">Couldn\'t load entries right now.</div>';
+    }
+  });
+
+  function escapeHtml(str){
+    if(!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+</script>
+
+</body>
+</html>
