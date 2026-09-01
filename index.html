@@ -203,6 +203,32 @@
     text-transform: uppercase;
   }
 
+  .music-toggle{
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1.5px solid var(--line);
+    color: var(--gold-bright);
+    font-size: 19px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    z-index: 50;
+    box-shadow: 0 6px 18px -6px rgba(0,0,0,0.55);
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+  .music-toggle:active{ transform: scale(0.9); }
+  .music-toggle.on{
+    border-color: var(--gold);
+    animation: musicPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes musicPulse{
+    0%,100%{ box-shadow: 0 6px 18px -6px rgba(0,0,0,0.55), 0 0 0 0 rgba(232,185,63,0.35); }
+    50%{ box-shadow: 0 6px 18px -6px rgba(0,0,0,0.55), 0 0 0 9px rgba(232,185,63,0); }
+  }
+
   .field{margin-bottom:21px;}
   .field:last-of-type{margin-bottom:0;}
   label{
@@ -446,6 +472,11 @@
 </head>
 <body>
 
+<button class="music-toggle" id="musicToggle" aria-label="Toggle background music" title="Toggle music">🎵</button>
+<audio id="bgMusic" loop preload="none">
+  <source src="https://cdn.freecodecamp.org/curriculum/js-music-player/cruising-for-a-musing.mp3" type="audio/mpeg">
+</audio>
+
 <div class="wrap">
 
   <svg class="crown-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -575,6 +606,30 @@
   const SUPABASE_URL = "https://itkoqbkvfkaqxjxvyofb.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0a29xYmt2ZmthcXhqeHZ5b2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyOTYwNzgsImV4cCI6MjEwMzg3MjA3OH0.JtK5WQ-KoTwa6MQ9k9PITmCoDtPrthYKnuubDT1BXxE";
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ---------- background music ----------
+  const bgMusic = document.getElementById('bgMusic');
+  bgMusic.volume = 0.35;
+  let musicOn = false;
+
+  function toggleMusic(){
+    const btn = document.getElementById('musicToggle');
+    if(!musicOn){
+      bgMusic.play().then(() => {
+        musicOn = true;
+        btn.classList.add('on');
+        btn.textContent = '🔊';
+      }).catch(err => {
+        console.error('Playback failed:', err);
+      });
+    } else {
+      bgMusic.pause();
+      musicOn = false;
+      btn.classList.remove('on');
+      btn.textContent = '🎵';
+    }
+  }
+  document.getElementById('musicToggle').addEventListener('click', toggleMusic);
 
   // ---------- progress tracking ----------
   const requiredIds = ['name','age','location'];
